@@ -1,6 +1,8 @@
-# simple_shell
+# Simple_shell
 
-Authors:
+## Shell
+
+## Authors
 
 - Manuel Puerta Villa
 - Miguel Palacios
