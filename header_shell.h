@@ -8,9 +8,11 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <sys/stat.h>
+#include <sys/errno.h>
 
 int strlenspace(char *s);
 size_t countwords(char *input);
 char **allocatewords(char *input, size_t numwords);
+ssize_t _getline(char **lineptr, size_t *n, FILE *stream);
 
-#endif
+#endif /* HEADER_H */
