@@ -8,6 +8,7 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <sys/stat.h>
+#include <sys/errno.h>
 
 /**
  * struct list_path - singly linked list for the path
@@ -36,5 +37,7 @@ int strlen_select(char *, char);
 int _strlen(const char *);
 void free_list_path(list_path *);
 void execute_func(char *, char **);
+ssize_t _getline(char **lineptr, size_t *n, FILE *stream);
 
-#endif
+
+#endif /* HEADER_H */
