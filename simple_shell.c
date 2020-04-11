@@ -2,44 +2,50 @@
 
 /**
  * main - simple_shell main
+ * @ac: number of arguments
+ * @av: Array of arguments
+ * @env: enviornment
  * Return: 0 if success
  */
-int main(void)
+int main(int ac __attribute__((unused)), char *av[], char **env)
 {
-	ssize_t nread = 0, family_member;
-	size_t size = 0, numwords = 0, i;
-	int status;
-	char *buffer = NULL;
+	ssize_t nread = 0, flag = 0;
+	size_t size = 0, numwords = 0, i, j;
+	char *exec = NULL, *buffer = NULL, *shell_count = NULL;
 	char **input_user = NULL;
-	struct stat sb;
+	list_path *head_path = NULL;
 
-	while (1)
+	head_path = linked_path(env);
+	for (j = 0;; j++)
 	{
-		write(STDOUT_FILENO, "My_simple_shell$ ", 17);
+		if (isatty(STDIN_FILENO) == 1)
+			write(STDOUT_FILENO, "My_simple_shell$ ", 17);
+
 		nread = getline(&buffer, &size, stdin);
 		if (nread == -1)
 			break;
 
-		numwords = countwords(buffer);
-
+		numwords = countwords(buffer, ' ');
 		input_user = allocatewords(buffer, numwords);
+		flag = check_path(&exec, head_path, input_user[0], numwords);
 
-		if (numwords > 0 && stat(input_user[0], &sb) == 0 && sb.st_mode & S_IXUSR)
+		if (flag == 1)
+			execute_func(exec, input_user);
+		else if (numwords > 0)
 		{
-
-			family_member = fork();
-			if (family_member == 0)
-				execve(input_user[0], input_user, NULL);
-			else
-				wait(&status);
+			i = not_found(j, av[0], input_user[0], &shell_count);
+			write(STDOUT_FILENO, shell_count, i);
+			free(shell_count);
 		}
 
 		for (i = 0; i < numwords; i++)
 			free(input_user[i]);
 		free(input_user);
 	}
-	free(buffer);
-	write(STDOUT_FILENO, "\n", 1);
+	if (isatty(STDIN_FILENO) == 1)
+		write(STDOUT_FILENO, "\n", 1);
 
+	free_list_path(head_path);
+	free(buffer);
 	return (0);
 }

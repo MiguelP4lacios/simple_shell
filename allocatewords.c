@@ -1,5 +1,11 @@
 #include "header_shell.h"
 
+/**
+ * allocatewords - create array of words
+ * @input: String with words for array
+ * @numwords: Number of words in input
+ * Return: pointer to array of words
+ */
 char **allocatewords(char *input, size_t numwords)
 {
 	char **master = NULL;
@@ -13,10 +19,10 @@ char **allocatewords(char *input, size_t numwords)
 	p = &input[0];
 	for (i = 0; i < numwords; i++)
 	{
-		while (p[0] == ' ' || p[0] == '\n')
+		while (p[0] == ' ')
 			p++;
 
-		len = strlenspace(p);
+		len = strlen_select(p, ' ');
 
 		master[i] = malloc(sizeof(char) * (len + 1));
 		if (master[i] == NULL)
