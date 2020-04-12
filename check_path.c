@@ -16,11 +16,20 @@ int check_path(char **exec, list_path *head, char *input_user, size_t numwords)
 	for (i = 0; head != NULL; i++)
 	{
 		*exec = str_concat(head->dir_path, input_user);
+
 		if (numwords > 0 && stat(*exec, &sb) == 0 && sb.st_mode & S_IXUSR)
+		{
 			return (1);
+		}
 
 		head = head->next;
 		free(*exec);
+	}
+
+	if (numwords > 0 && stat(input_user, &sb) == 0 && sb.st_mode & S_IXUSR)
+	{
+		*exec = input_user;
+		return (2);
 	}
 
 	return (0);

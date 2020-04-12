@@ -16,6 +16,16 @@ list_path *linked_path(char **env)
 	path = _getenv("PATH", env);
 	num_paths = countwords(path, select);
 
+	if (path[0] == ':')
+	{
+		p = malloc(sizeof(char) * (1 + 1 + 1));
+		p[0] = '.';
+		p[1] = '/';
+		p[2] = '\0';
+		add_node_end(&head, p);
+		path++;
+	}
+
 	for (i = 0; i < num_paths; i++)
 	{
 		len_dir = strlen_select(path, select);
