@@ -1,5 +1,6 @@
 # Simple Shell Project
 
+<<<<<<< HEAD
 This project develope a **UNIX command line interpreter** base in the _sh_ shell.
 
 ## Installation
