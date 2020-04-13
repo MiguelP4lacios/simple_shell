@@ -14,7 +14,6 @@ int main(int ac __attribute__((unused)), char *av[], char **env)
 	char *exec = NULL, *buffer = NULL, *shell_count = NULL;
 	char **input_user = NULL;
 	list_path *head_path = NULL;
-	char **auxenv;
 
 	signal(SIGINT, signal_handler);
 
