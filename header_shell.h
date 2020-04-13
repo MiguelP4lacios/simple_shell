@@ -8,6 +8,7 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <sys/stat.h>
+#include <signal.h>
 #include <sys/errno.h>
 
 /**
@@ -36,12 +37,11 @@ int strlenspace(char *);
 int strlen_select(char *, char);
 int _strlen(const char *);
 void free_list_path(list_path *);
-void execute_func(char *, char **);
+void execute_func(char *, char **, ssize_t, char **);
 ssize_t _getline(char **lineptr, size_t *n, FILE *stream);
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
 void check_built_in(char **input, char *buffer, list_path *);
 int _strcmp(char *s1, char *s2);
 void exit_built_in(char ** in, char *b, list_path *);
-
 
 #endif /* HEADER_H */

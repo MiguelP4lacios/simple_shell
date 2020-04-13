@@ -15,6 +15,8 @@ int main(int ac __attribute__((unused)), char *av[], char **env)
 	char **input_user = NULL;
 	list_path *head_path = NULL;
 
+	signal(SIGINT, SIG_IGN);
+
 	head_path = linked_path(env);
 	for (j = 0;; j++)
 	{
@@ -30,8 +32,8 @@ int main(int ac __attribute__((unused)), char *av[], char **env)
 			check_built_in(input_user, buffer, head_path);
 		flag = check_path(&exec, head_path, input_user[0], numwords);
 
-		if (flag == 1)
-			execute_func(exec, input_user);
+		if (flag != 0)
+			execute_func(exec, input_user, flag, env);
 		else if (numwords > 0)
 		{
 			i = not_found(j, av[0], input_user[0], &shell_count);
