@@ -8,6 +8,7 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <sys/stat.h>
+#include <signal.h>
 #include <sys/errno.h>
 
 /**
@@ -36,8 +37,7 @@ int strlenspace(char *);
 int strlen_select(char *, char);
 int _strlen(const char *);
 void free_list_path(list_path *);
-void execute_func(char *, char **);
+void execute_func(char *, char **, ssize_t, char **);
 ssize_t _getline(char **lineptr, size_t *n, FILE *stream);
-
 
 #endif /* HEADER_H */
