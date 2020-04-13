@@ -23,12 +23,13 @@ int main(int ac __attribute__((unused)), char *av[], char **env)
 		if (isatty(STDIN_FILENO) == 1)
 			write(STDOUT_FILENO, "My_simple_shell$ ", 17);
 
-		nread = getline(&buffer, &size, stdin);
+		nread = _getline(&buffer, &size, stdin);
 		if (nread == -1)
 			break;
-
 		numwords = countwords(buffer, ' ');
 		input_user = allocatewords(buffer, numwords);
+		if (input_user[0] != NULL)
+			check_built_in(input_user, buffer, head_path);
 		flag = check_path(&exec, head_path, input_user[0], numwords);
 
 		if (flag != 0)
