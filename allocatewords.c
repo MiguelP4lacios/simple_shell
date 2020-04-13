@@ -19,7 +19,7 @@ char **allocatewords(char *input, size_t numwords)
 	p = &input[0];
 	for (i = 0; i < numwords; i++)
 	{
-		while (p[0] == ' ')
+		while (p[0] == ' ' || p[0] == 9)
 			p++;
 
 		len = strlen_select(p, ' ');
