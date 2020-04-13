@@ -12,7 +12,7 @@ void exit_built_in(char **in, char *b, list_path *h_p)
 
 	if (in[1] != NULL)
 	{
-		status_exit = atoi(in[1]);
+		status_exit = _atoi(in[1]);
 	}
 	else
 	{

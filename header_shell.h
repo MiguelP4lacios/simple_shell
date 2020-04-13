@@ -43,5 +43,7 @@ void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
 void check_built_in(char **input, char *buffer, list_path *);
 int _strcmp(char *s1, char *s2);
 void exit_built_in(char ** in, char *b, list_path *);
+unsigned int _atoi(char *s);
+
 
 #endif /* HEADER_H */
