@@ -13,7 +13,7 @@ size_t countwords(char *input, char select)
 
 	if (input[0] == '\n')
 		return (0);
-	else if (input[0] != select)
+	else if (input[0] != select && input[0] != 9)
 		numwords++;
 
 	for (i = 1; input[i] != '\0'; i++)
@@ -22,6 +22,9 @@ size_t countwords(char *input, char select)
 			break;
 
 		if (input[i - 1] == select && input[i] != select)
+			numwords++;
+
+		if (input[i - 1] == 9 && input[i] != 9)
 			numwords++;
 	}
 
