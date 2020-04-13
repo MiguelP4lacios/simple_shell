@@ -10,7 +10,7 @@
  */
 ssize_t _getline(char **lineptr, size_t *n, FILE *stream)
 {
-	const size_t INITALLOC = 16, ALLOCSTEP = 16;
+	static size_t INITALLOC = 16, ALLOCSTEP = 16;
 	size_t num_read = 0;
 	int c;
 

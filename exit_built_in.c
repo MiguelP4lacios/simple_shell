@@ -8,8 +8,16 @@
 */
 void exit_built_in(char **in, char *b, list_path *h_p)
 {
-	size_t i;
+	size_t i, status_exit;
 
+	if (in[1] != NULL)
+	{
+		status_exit = _atoi(in[1]);
+	}
+	else
+	{
+		status_exit = 0;
+	}
 	if (b)
 		free(b);
 	if (in)
@@ -19,5 +27,5 @@ void exit_built_in(char **in, char *b, list_path *h_p)
 		free(in);
 	}
 	free_list_path(h_p);
-	exit(0);
+	exit(status_exit);
 }
