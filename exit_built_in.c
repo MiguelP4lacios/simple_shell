@@ -8,11 +8,26 @@
 */
 void exit_built_in(char **in, char *b, list_path *h_p)
 {
-	size_t i, status_exit;
+	size_t i = 0, status_exit, FV;
 
 	if (in[1] != NULL)
 	{
-		status_exit = _atoi(in[1]);
+		while (in[1][i] != '\0')
+		{
+			if (_isdigit(in[1][i]) == 1)
+			{
+				FV = 1;
+			}
+			else
+			{
+				return;
+			}
+			i++;
+		}
+		if (FV == 1)
+		{
+			status_exit = _atoi(in[1]);
+		}
 	}
 	else
 	{
