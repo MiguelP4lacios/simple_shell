@@ -15,6 +15,6 @@ void check_built_in(char **input, char *buff, list_path *head_path)
 	}
 	if (_strcmp(input[0], "env") == 0)
 	{
-		print_env(environ);
+		print_env();
 	}
 }
