@@ -2,10 +2,9 @@
 
 /**
  * linked_path - creates a linked list of the path
- * @env: enviornment
  * Return: pointer to linked list
  */
-list_path *linked_path(char **env)
+list_path *linked_path(void)
 {
 	char select = ':';
 	char *path = NULL;
@@ -13,7 +12,7 @@ list_path *linked_path(char **env)
 	char *p = NULL;
 	list_path *head = NULL;
 
-	path = _getenv("PATH", env);
+	path = _getenv("PATH", environ);
 	num_paths = countwords(path, select);
 
 	if (path[0] == ':')

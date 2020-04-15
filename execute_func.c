@@ -8,7 +8,7 @@
  * @env: enviornment variable
  * Return: Exit status
  */
-int execute_func(char *exec, char **input_user, ssize_t flag, char **env)
+int execute_func(char *exec, char **input_user, ssize_t flag)
 {
 	int status;
 	ssize_t family_member;
@@ -16,7 +16,7 @@ int execute_func(char *exec, char **input_user, ssize_t flag, char **env)
 
 	family_member = fork();
 	if (family_member == 0)
-		execve(exec, input_user, env);
+		execve(exec, input_user, environ);
 
 	wait(&status);
 	s = WEXITSTATUS(status);

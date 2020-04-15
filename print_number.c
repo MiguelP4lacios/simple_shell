@@ -3,11 +3,11 @@
 /**
  * print_number - Save in buffer numbers to be printed
  * @n: number to be printed
- * @shell_count: buffer where numbers are going to be saved
+ * @buffer: buffer where numbers are going to be saved
  * @count: position of the buffer
  * Return: new position of the buffer
  */
-size_t print_number(size_t n, char *shell_count, size_t count)
+size_t print_number(size_t n, char *buffer, size_t count)
 {
 	ssize_t i, j, z = 1;
 	size_t n1;
@@ -21,7 +21,7 @@ size_t print_number(size_t n, char *shell_count, size_t count)
 
 	for (; z != 0;)
 	{
-		shell_count[count++] = (n1 / z) + '0';
+		buffer[count++] = (n1 / z) + '0';
 		n1 = n1 % z;
 		z = z / 10;
 	}

@@ -7,7 +7,7 @@
  * return : nothing
  *
 */
-void check_built_in(char **input, char *buff, list_path *head_path, char **env)
+void check_built_in(char **input, char *buff, list_path *head_path)
 {
 	if (_strcmp(input[0], "exit") == 0)
 	{
@@ -15,6 +15,6 @@ void check_built_in(char **input, char *buff, list_path *head_path, char **env)
 	}
 	if (_strcmp(input[0], "env") == 0)
 	{
-		print_env(env);
+		print_env(environ);
 	}
 }

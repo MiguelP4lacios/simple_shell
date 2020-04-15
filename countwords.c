@@ -1,30 +1,31 @@
 #include "header_shell.h"
 
 /**
- * countwords - Counts words until a select char is found
+ * countwords - Counts words until a s char is found
  * @input: Pointer to string to be count
- * @select: the select char
+ * @s: the selected char
  * Return: Number of words count
  */
-size_t countwords(char *input, char select)
+size_t countwords(char *in, char s)
 {
 	ssize_t i;
 	size_t numwords = 0;
+	char s2 = s;
 
-	if (input[0] == '\n')
+	if (s == ' ')
+		s2 = 9;
+
+	if (in[0] == '\n')
 		return (0);
-	else if (input[0] != select && input[0] != 9)
+	else if (in[0] != s && in[0] != 9)
 		numwords++;
 
-	for (i = 1; input[i] != '\0'; i++)
+	for (i = 1; in[i] != '\0'; i++)
 	{
-		if (input[i] == '\n' && input[i + 1] == '\0')
+		if (in[i] == '\n' && in[i + 1] == '\0')
 			break;
 
-		if (input[i - 1] == select && input[i] != select)
-			numwords++;
-
-		if (input[i - 1] == 9 && input[i] != 9)
+		if ((in[i - 1] == s && in[i] != s) || (in[i - 1] == s2 && in[i] != s2))
 			numwords++;
 	}
 

@@ -7,7 +7,7 @@
  * @env: enviornment
  * Return: 0 if success
  */
-int main(int ac __attribute__((unused)), char *av[], char **env)
+int main(int ac __attribute__((unused)), char *av[])
 {
 	ssize_t nread = 0, flag = 0, status = 0;
 	size_t size = 0, numwords = 0, i, j;
@@ -16,8 +16,7 @@ int main(int ac __attribute__((unused)), char *av[], char **env)
 	list_path *head_path = NULL;
 
 	signal(SIGINT, signal_handler);
-
-	head_path = linked_path(env);
+	head_path = linked_path();
 	for (j = 0;; j++)
 	{
 		if (isatty(STDIN_FILENO) == 1)
@@ -26,18 +25,18 @@ int main(int ac __attribute__((unused)), char *av[], char **env)
 		nread = _getline(&buffer, &size, stdin);
 		if (nread == -1)
 			break;
-
 		numwords = countwords(buffer, ' ');
-		input_user = allocatewords(buffer, numwords);
+		input_user = allocatewords(buffer, &numwords, status);
 		if (input_user[0] != NULL)
-			check_built_in(input_user, buffer, head_path, env);
+			check_built_in(input_user, buffer, head_path);
+
 		flag = check_path(&exec, head_path, input_user[0], numwords);
 
-		if (flag != 0)
-			status = execute_func(exec, input_user, flag, env);
-		else if (numwords > 0)
+		if (flag == 1 || flag == 2)
+			status = execute_func(exec, input_user, flag);
+		else if (numwords > 0 && flag != 4)
 		{
-			i = not_found(j, av[0], input_user[0], &shell_count);
+			i = not_found(j, av[0], input_user[0], &shell_count, flag);
 			write(STDOUT_FILENO, shell_count, i);
 			free(shell_count);
 		}
@@ -47,13 +46,7 @@ int main(int ac __attribute__((unused)), char *av[], char **env)
 	}
 	if (isatty(STDIN_FILENO) == 1)
 		write(STDOUT_FILENO, "\n", 1);
-
 	free_list_path(head_path);
 	free(buffer);
 	return (status);
-}
-
-void signal_handler(int signal __attribute__((unused)))
-{
-	write(STDOUT_FILENO, "\n$ ", 3);
 }
