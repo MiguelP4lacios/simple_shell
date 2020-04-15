@@ -34,7 +34,7 @@ list_path *linked_path(void);
 size_t print_number(size_t, char *, size_t);
 size_t countwords(char *, char);
 size_t not_found(size_t j, char *av, char *input_user, char **, int);
-int check_path(char **, list_path *, char *, size_t);
+int check_path(char **, list_path *, char *, size_t, ssize_t *);
 int strlenspace(char *);
 int strlen_select(char *, char);
 int _strlen(const char *);
