@@ -22,7 +22,7 @@ int main(int ac __attribute__((unused)), char *av[])
 		if (isatty(STDIN_FILENO) == 1)
 			write(STDOUT_FILENO, "$ ", 2);
 
-		nread = _getline(&buffer, &size, stdin);
+		nread = getline(&buffer, &size, stdin);
 		if (nread == -1)
 			break;
 		numwords = countwords(buffer, ' ');
