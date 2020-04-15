@@ -30,7 +30,7 @@ int main(int ac __attribute__((unused)), char *av[])
 		if (input_user[0] != NULL)
 			check_built_in(input_user, buffer, head_path);
 
-		flag = check_path(&exec, head_path, input_user[0], numwords);
+		flag = check_path(&exec, head_path, input_user[0], numwords, &status);
 
 		if (flag == 1 || flag == 2)
 			status = execute_func(exec, input_user, flag);

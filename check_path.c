@@ -12,7 +12,7 @@
  * 3 (path + input) || (input) exist but not executable
  * 4 Do NOTHING
  */
-int check_path(char **exec, list_path *head, char *input_user, size_t numwords)
+int check_path(char **exec, list_path *head, char *input_user, size_t numwords, ssize_t *status)
 {
 	size_t i;
 	struct stat sb;
@@ -21,11 +21,16 @@ int check_path(char **exec, list_path *head, char *input_user, size_t numwords)
 		return (0);
 
 	if (_strcmp(input_user, ".") == 0)
+	{
+		*status = 127;
 		return (4);
+	}
 
 	if (_strcmp(input_user, "..") == 0)
+	{
+		*status = 127;
 		return (3);
-
+	}
 	for (i = 0; head != NULL; i++)
 	{
 		*exec = str_concat(head->dir_path, input_user);
@@ -36,6 +41,7 @@ int check_path(char **exec, list_path *head, char *input_user, size_t numwords)
 		}
 		else if (stat(*exec, &sb) == 0)
 		{
+			*status = 126;
 			free(*exec);
 			return (3);
 		}
@@ -48,7 +54,11 @@ int check_path(char **exec, list_path *head, char *input_user, size_t numwords)
 	if (stat(input_user, &sb) == 0 && sb.st_mode & S_IXUSR)
 		return (2);
 	else if (stat(*exec, &sb) == 0)
+	{
+		*status = 126;
 		return (3);
+	}
 
+	*status = 127;
 	return (0);
 }
