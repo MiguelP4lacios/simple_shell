@@ -4,13 +4,14 @@
  * @env: envoirment
  * return : nothing
 */
-void print_env(char **env)
+void print_env(void)
 {
 	size_t i = 0;
 
-	while (env[i])
+	while (environ[i])
 	{
-		write(1, env[i], _strlen(env[i]));
+		write(1,environ[i], _strlen(environ[i]));
+		write(1,"\n",1);
 		i++;
 	}
 }
