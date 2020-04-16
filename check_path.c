@@ -33,9 +33,9 @@ int check_path(char **exec, list_path *head, char *input_user, size_t numwords, 
 	for (i = 0; head != NULL; i++)
 	{
 		*exec = str_concat(head->dir_path, input_user);
-		if (stat(*exec, &sb) == 0 && sb.st_mode & S_IXUSR && !S_ISDIR(sb.st_mode))
+		if (stat(*exec, &sb) == 0 && sb.st_mode & S_IXUSR && !S_ISDIR(sb.st_mode) && input_user[0] != '/')
 			return (1);
-		else if (stat(*exec, &sb) == 0)
+		else if (stat(*exec, &sb) == 0 && input_user[0] != '/')
 		{
 			*status = 126;
 			free(*exec);
@@ -45,9 +45,9 @@ int check_path(char **exec, list_path *head, char *input_user, size_t numwords, 
 		free(*exec);
 	}
 	*exec = input_user;
-	if (stat(input_user, &sb) == 0 && sb.st_mode & S_IXUSR && !S_ISDIR(sb.st_mode))
+	if (stat(input_user, &sb) == 0 && sb.st_mode & S_IXUSR && !S_ISDIR(sb.st_mode) && input_user[0] == '/')
 		return (2);
-	else if (stat(*exec, &sb) == 0)
+	else if (stat(*exec, &sb) == 0 && input_user[0] == '/')
 	{
 		*status = 126;
 		return (3);
