@@ -102,8 +102,6 @@ char **check_words(char **master, size_t *numwords, size_t status)
 					free(p);
 					p = NULL;
 
-					printf("len_var + 1 = %d\n", len_var + 1);
-					printf("len_master = %d\n", _strlen(master[i]));
 					if (var != NULL || len_var + 1 != _strlen(master[i]))
 					{
 						master[i] = realloc_str(master, i, j, var, len_var);
