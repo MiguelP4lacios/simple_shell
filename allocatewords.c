@@ -99,7 +99,7 @@ char **check_words(char **master, size_t *numwords, size_t status)
 					p[k - j - 1] = master[i][k];
 				}
 				p[len_var] = '\0';
-				var = _getenv(p, environ);
+				var = _getenv(p);
 				free(p);
 				p = NULL;
 

@@ -6,18 +6,17 @@
  * @env: enviornment
  * Return: Pointer to location of variable
  */
-char *_getenv(const char *name, char **env)
+char *_getenv(const char *name)
 {
 	int len, flag, i, j;
-	char *p = NULL;
 
 	len = _strlen(name);
 
-	for (i = 0; env[i] != NULL; i++)
+	for (i = 0; environ[i] != NULL; i++)
 	{
 		for (j = 0; j < len; j++)
 		{
-			if (name[j] == env[i][j])
+			if (name[j] == environ[i][j])
 				flag = 1;
 			else
 			{
@@ -25,11 +24,8 @@ char *_getenv(const char *name, char **env)
 				break;
 			}
 		}
-		if (flag == 1 && env[i][j] == '=')
-		{
-			p = &env[i][j] + 1;
-			return (p);
+		if (flag == 1 && environ[i][j] == '=')
+			return (&environ[i][j + 1]);
 		}
-	}
 	return (NULL);
 }

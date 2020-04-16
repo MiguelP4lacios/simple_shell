@@ -15,7 +15,6 @@ int main(int ac __attribute__((unused)), char *av[])
 	list_path *head_path = NULL;
 
 	signal(SIGINT, signal_handler);
-	head_path = linked_path();
 	for (j = 0;; j++)
 	{
 		if (isatty(STDIN_FILENO) == 1)
@@ -23,7 +22,8 @@ int main(int ac __attribute__((unused)), char *av[])
 		nread = getline(&buffer, &size, stdin);
 		if (nread == -1)
 			break;
-
+		free_list_path(head_path);
+		head_path = linked_path();
 		numwords = countwords(buffer, ' ');
 		input_user = allocatewords(buffer, &numwords, status);
 		if (input_user[0] != NULL)

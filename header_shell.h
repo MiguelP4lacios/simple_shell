@@ -28,7 +28,7 @@ typedef struct list_path
 
 char **allocatewords(char *, size_t *, size_t);
 char *str_concat(char *, char *);
-char *_getenv(const char *, char **);
+char *_getenv(const char *);
 list_path *add_node_end(list_path **, char *);
 list_path *linked_path(void);
 size_t print_number(size_t, char *, size_t);
@@ -56,9 +56,13 @@ ssize_t help_built_in(char **);
 void help_exit(void);
 void help_env(void);
 void help_help(void);
+ssize_t setenv_built_in(char **input, ssize_t *);
+ssize_t unsetenv_built_in(char **input, ssize_t *);
+ssize_t cd_built_in(char **input, ssize_t *);
 void help_setenv(void);
 void help_unsetenv(void);
 void help_cd(void);
 void help(void);
+
 
 #endif /* HEADER_H */
