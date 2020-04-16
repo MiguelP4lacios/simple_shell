@@ -9,7 +9,7 @@
 */
 ssize_t check_built_in(char **input, char *buff, list_path *head_path, ssize_t *status)
 {
-	ssize_t flag = 0;
+	ssize_t flag = 10;
 
 	if (_strcmp(input[0], "exit") == 0)
 	{
@@ -19,7 +19,7 @@ ssize_t check_built_in(char **input, char *buff, list_path *head_path, ssize_t *
 	{
 		flag = print_env();
 	}
-	if (_strcmp(input[0], "help") == 0 )
+	if (_strcmp(input[0], "help") == 0)
 	{
 		flag = help_built_in(input);
 	}
