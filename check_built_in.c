@@ -17,4 +17,9 @@ void check_built_in(char **input, char *buff, list_path *head_path)
 	{
 		print_env();
 	}
+	if (_strcmp(input[0], "help") == 0)
+	{
+		help_built_in(input);
+	}
+	
 }
