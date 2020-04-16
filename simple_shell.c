@@ -14,8 +14,8 @@ int main(int ac __attribute__((unused)), char *av[])
 	char **input_user = NULL;
 	list_path *head_path = NULL;
 
-	head_path = linked_path();
 	signal(SIGINT, signal_handler);
+	head_path = linked_path();
 	for (j = 0;; j++)
 	{
 		if (isatty(STDIN_FILENO) == 1)

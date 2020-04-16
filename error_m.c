@@ -57,6 +57,14 @@ size_t error_m(size_t j, char *av, char **input, char **shell_count, int flag)
 	return (i);
 }
 
+/**
+ * error_m_illegal - Saves in buffer message to be print error message
+ * @j: Line of shell
+ * @av: Argument zero of argv
+ * @input: input of the user
+ * @shell_count: buffer where the text will be save
+ * Return: Len of text
+ */
 size_t error_m_illegal(size_t j, char *av, char **input, char **shell_count)
 {
 	size_t aux, len_arg, len_numline;
