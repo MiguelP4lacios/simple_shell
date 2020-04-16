@@ -8,7 +8,7 @@
  */
 int main(int ac __attribute__((unused)), char *av[])
 {
-	ssize_t nread = 0, flag = 0, status = 0;
+	ssize_t nread = 0, flag = 20, status = 0;
 	size_t size = 0, numwords = 0, i, j;
 	char *exec = NULL, *buffer = NULL, *shell_count = NULL;
 	char **input_user = NULL;
@@ -28,13 +28,12 @@ int main(int ac __attribute__((unused)), char *av[])
 		input_user = allocatewords(buffer, &numwords, status);
 		if (input_user[0] != NULL)
 			flag = check_built_in(input_user, buffer, head_path, &status);
-		if (flag != 5 || flag != 0)
+		if (flag != 0 && flag != 5)
 			flag = check_path(&exec, head_path, input_user[0], numwords, &status);
 		if (flag == 1 || flag == 2)
 			status = execute_func(exec, input_user, flag);
-		else if ((numwords > 0 && flag != 4 ))
+		else if ((numwords > 0 && flag != 4 && flag != 0))
 		{
-
 			i = error_m(j, av[0], input_user, &shell_count, flag);
 			write(STDERR_FILENO, shell_count, i);
 			free(shell_count);
