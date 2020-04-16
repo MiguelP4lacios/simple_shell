@@ -6,6 +6,7 @@
  * @head: head of list of path
  * @in: input user - first word
  * @numwords: number of words input
+ * @status: status of last command
  * Return: 0 not found
  * 1 (path + input) is executable --> free in execute_func
  * 2 (input) is executable

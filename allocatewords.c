@@ -1,10 +1,12 @@
 #include "header_shell.h"
-char *realloc_str(char **master, size_t i, size_t j, char *var, size_t len_var);
+char *realloc_str(char **, size_t, size_t, char *, size_t);
+char *delete_string(char **, size_t, size_t *);
 
 /**
  * allocatewords - create array of words
  * @input: String with words for array
  * @numwords: Number of words in input
+ * @status: status of last command
  * Return: pointer to array of words
  */
 char **allocatewords(char *input, size_t *numwords, size_t status)
@@ -55,7 +57,7 @@ char **allocatewords(char *input, size_t *numwords, size_t status)
  */
 char **check_words(char **master, size_t *numwords, size_t status)
 {
-	size_t i, j, k, l, terminal, len_string;
+	size_t i, j, k, terminal;
 	char *var = NULL;
 	char *p = NULL;
 	int len_var;
@@ -73,71 +75,83 @@ char **check_words(char **master, size_t *numwords, size_t status)
 			return (master);
 		}
 
-		for (j = 0; master[i][j] != '\0'; j++)
+		for (j = 0; master[i] != NULL && master[i][j] != '\0'; j++)
 		{
-			if (master[i][j] == '$')
+			if (master[i][j] == '$' && master[i][j + 1] == '$')
 			{
-				if (master[i][j + 1] == '$')
+				terminal = getpid();
+				master[i] = realloc_special_num(terminal, master, i, j);
+			}
+			else if (master[i][j] == '$' && master[i][j + 1] == '?')
+				master[i] = realloc_special_num(status, master, i, j);
+			else if (master[i][j] == '$' &&
+				 (_isalpha(master[i][j + 1]) == 1 || master[i][j + 1] == '_'))
+			{
+				for (len_var = 0; _isalpha(master[i][j + len_var + 1]) == 1 ||
+						  master[i][j + len_var + 1] == '_' ||
+						  _isdigit(master[i][j + len_var + 1]);
+				     len_var++)
 				{
-					terminal = getpid();
-					master[i] = realloc_special_num(terminal, master, i, j);
 				}
-				else if (master[i][j + 1] == '?')
+				p = malloc(sizeof(char) * (len_var + 1));
+				for (k = j + 1; k < len_var + j + 1; k++)
 				{
-					master[i] = realloc_special_num(status, master, i, j);
+					p[k - j - 1] = master[i][k];
 				}
-				else if (_isalpha(master[i][j + 1]) == 1 || master[i][j + 1] == '_')
+				p[len_var] = '\0';
+				var = _getenv(p, environ);
+				free(p);
+				p = NULL;
+
+				if (var != NULL)
+					master[i] = realloc_str(master, i, j, var, len_var);
+				else
 				{
-					for (len_var = 0; _isalpha(master[i][j + len_var + 1]) == 1 || master[i][j + len_var + 1] == '_' || _isdigit(master[i][j + len_var + 1]); len_var++)
-					{
-					}
-
-					p = malloc(sizeof(char) * (len_var + 1));
-					for (k = j + 1; k < len_var + j + 1; k++)
-					{
-						p[k - j - 1] = master[i][k];
-					}
-					p[len_var] = '\0';
-					var = _getenv(p, environ);
-					free(p);
-					p = NULL;
-
-					if (var != NULL || len_var + 1 != _strlen(master[i]))
-					{
-						master[i] = realloc_str(master, i, j, var, len_var);
-					}
-					else
-					{
-						for (k = i; master[k + 1] != NULL; k++)
-						{
-							len_string = _strlen(master[k + 1]);
-							p = malloc(sizeof(char) * len_string + 1);
-							for (l = 0; l < len_string; l++)
-							{
-								p[l] = master[k + 1][l];
-							}
-							p[l] = '\0';
-							free(master[k]);
-							master[k] = p;
-						}
-						free(master[k]);
-						master[k] = NULL;
-						*numwords = k;
-					}
+					master[*numwords - 1] = delete_string(master, i, numwords);
+					if (i > 0)
+						i--;
 				}
 			}
 		}
 	}
-
 	return (master);
 }
 
 /**
- * realloc_str - insert number in master[i], position j
- * @number: Number to be inserted
+ * delete_string - delete a word from an array of arrays
+ * @master: array of strings, with the word to be modify
+ * @i: position of word in master
+ * @numwords: number of words
+ * Return: NUll always
+ */
+char *delete_string(char **master, size_t i, size_t *numwords)
+{
+	size_t k, l, len_string;
+	char *p = NULL;
+
+	for (k = i; master[k + 1] != NULL; k++)
+	{
+		len_string = _strlen(master[k + 1]);
+		p = malloc(sizeof(char) * len_string + 1);
+		for (l = 0; l < len_string; l++)
+		{
+			p[l] = master[k + 1][l];
+		}
+		p[l] = '\0';
+		free(master[k]);
+		master[k] = p;
+	}
+	free(master[k]);
+	*numwords = k;
+	return (NULL);
+}
+/**
+ * realloc_str - insert string in master[i], position j
  * @master: array of strings, with the word to be modify
  * @i: position of word in master
  * @j: position of letter in word of master
+ * @var: Environmental variable
+ * @len_var: Len of var
  * Return: pointer to modified word
  */
 char *realloc_str(char **master, size_t i, size_t j, char *var, size_t len_var)
