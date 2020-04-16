@@ -12,7 +12,7 @@ list_path *linked_path(void)
 	char *p = NULL;
 	list_path *head = NULL;
 
-	path = _getenv("PATH", environ);
+	path = _getenv("PATH");
 	num_paths = countwords(path, select);
 
 	for (i = 0; i < num_paths || path[0] == ':'; i++)

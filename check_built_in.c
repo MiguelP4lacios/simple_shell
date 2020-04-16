@@ -4,8 +4,7 @@
  * @input: input user
  * @buff: buffer input
  * @head_path: PATH
- * return : nothing
- *
+ * Return : flag
 */
 ssize_t check_built_in(char **input, char *buff, list_path *head_path, ssize_t *status)
 {
@@ -23,5 +22,14 @@ ssize_t check_built_in(char **input, char *buff, list_path *head_path, ssize_t *
 	{
 		flag = help_built_in(input);
 	}
+	if (_strcmp(input[0], "setenv") == 0)
+		flag = setenv_built_in(input, status);
+
+	if (_strcmp(input[0], "unsetenv") == 0)
+		flag = unsetenv_built_in(input, status);
+
+	if (_strcmp(input[0], "cd") == 0)
+		flag = cd_built_in(input, status);
+
 	return (flag);
 }
