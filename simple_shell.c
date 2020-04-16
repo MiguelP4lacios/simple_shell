@@ -27,12 +27,12 @@ int main(int ac __attribute__((unused)), char *av[])
 		numwords = countwords(buffer, ' ');
 		input_user = allocatewords(buffer, &numwords, status);
 		if (input_user[0] != NULL)
-			flag = check_built_in(input_user, buffer, head_path);
-		if (flag != 5)
+			flag = check_built_in(input_user, buffer, head_path, &status);
+		if (flag != 5 || flag != 0)
 			flag = check_path(&exec, head_path, input_user[0], numwords, &status);
 		if (flag == 1 || flag == 2)
 			status = execute_func(exec, input_user, flag);
-		else if ((numwords > 0 && flag != 4))
+		else if ((numwords > 0 && flag != 4 ))
 		{
 
 			i = error_m(j, av[0], input_user, &shell_count, flag);

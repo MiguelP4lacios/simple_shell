@@ -4,20 +4,30 @@
  * 
  * 
 */
-void help_built_in(char **input)
+ssize_t help_built_in(char **input)
 {
-	if (_strcmp(input[1], "env") == 0)
+	if (input[1] != NULL)
 	{
-		help_env();
-	}
-	else if (_strcmp(input[1], "exit") == 0)
-	{
-		help_exit();
-	}
-	else if (_strcmp(input[1], "help") == 0)
-	{
-		help_help();
+		if (_strcmp(input[1], "env") == 0)
+		{
+			help_env();
+			return (0);
+		}
+		else if (_strcmp(input[1], "exit") == 0)
+		{
+			help_exit();
+			return(0);
+		}
+		else if (_strcmp(input[1], "help") == 0 )
+		{
+			help_help();
+			return(0);
+		}
+		else
+			return (3);
 	}
 	else
-		return;
+	{
+		return (3); /* all */
+	}
 }

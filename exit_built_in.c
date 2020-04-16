@@ -6,9 +6,9 @@
  * @h_p: head path
  * return: nothing
 */
-size_t exit_built_in(char **in, char *b, list_path *h_p)
+ssize_t exit_built_in(char **in, char *b, list_path *h_p, ssize_t *status)
 {
-	size_t i = 0, status_exit, FV;
+	size_t i = 0, FV;
 
 	if (in[1] != NULL)
 	{
@@ -20,18 +20,15 @@ size_t exit_built_in(char **in, char *b, list_path *h_p)
 			}
 			else
 			{
+				*status = 2;
 				return (5);
 			}
 			i++;
 		}
 		if (FV == 1)
 		{
-			status_exit = _atoi(in[1]);
+			*status = _atoi(in[1]);
 		}
-	}
-	else
-	{
-		status_exit = 0;
 	}
 	if (b)
 		free(b);
@@ -42,5 +39,5 @@ size_t exit_built_in(char **in, char *b, list_path *h_p)
 		free(in);
 	}
 	free_list_path(h_p);
-	exit(status_exit);
+	exit(*status);
 }

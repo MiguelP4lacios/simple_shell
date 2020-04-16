@@ -3,7 +3,7 @@
  * print_env - built-in print env
  * return : nothing
 */
-void print_env(void)
+ssize_t print_env(void)
 {
 	size_t i = 0;
 
@@ -13,4 +13,5 @@ void print_env(void)
 		write(STDOUT_FILENO, "\n", 1);
 		i++;
 	}
+	return (0);
 }
