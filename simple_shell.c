@@ -4,7 +4,6 @@
  * main - simple_shell main
  * @ac: number of arguments
  * @av: Array of arguments
- * @env: enviornment
  * Return: 0 if success
  */
 int main(int ac __attribute__((unused)), char *av[])
@@ -36,7 +35,7 @@ int main(int ac __attribute__((unused)), char *av[])
 			status = execute_func(exec, input_user, flag);
 		else if (numwords > 0 && flag != 4)
 		{
-			i = not_found(j, av[0], input_user[0], &shell_count, flag);
+			i = error_m(j, av[0], input_user, &shell_count, flag);
 			write(STDOUT_FILENO, shell_count, i);
 			free(shell_count);
 		}

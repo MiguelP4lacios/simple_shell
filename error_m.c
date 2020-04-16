@@ -1,28 +1,31 @@
 #include "header_shell.h"
 
 /**
- * not_found - Saves in buffer message to be print of no found
+ * error_m - Saves in buffer message to be print error message
  * @j: Line of shell
  * @av: Argument zero of argv
- * @input: firt word of the user
+ * @input: input of the user
  * @shell_count: buffer where the text will be save
  * @flag: if flag is 3 denied if else not found
  * Return: Len of text
  */
-size_t not_found(size_t j, char *av, char *input, char **shell_count, int flag)
+size_t error_m(size_t j, char *av, char **input, char **shell_count, int flag)
 {
 	size_t aux, len_arg, len_numline, len_first_input, len_mes, i, k, sum;
 	char nfound[] = ": not found\n";
 	char denied[] = ": Permission denied\n";
+	char Illegal[] = ": Illegal number: ";
 
 	aux = j;
 	len_arg = strlen(av);
 	for (len_numline = 1; (aux + 1) / 10 != 0; len_numline++)
 		aux = aux / 10;
+	len_first_input = strlen(input[0]);
 
-	len_first_input = strlen(input);
 	if (flag == 3)
 		len_mes = 20;
+	else if (flag == 5)
+		len_mes = 18;
 	else
 		len_mes = 12;
 
@@ -38,12 +41,15 @@ size_t not_found(size_t j, char *av, char *input, char **shell_count, int flag)
 	shell_count[0][i++] = ':';
 	shell_count[0][i++] = ' ';
 
-	for (k = 0; input[k] != '\0'; k++, i++)
-		shell_count[0][i] = input[k];
+	for (k = 0; input[0][k] != '\0'; k++, i++)
+		shell_count[0][i] = input[0][k];
 
 	if (flag == 3)
 		for (k = 0; denied[k] != '\0'; k++, i++)
 			shell_count[0][i] = denied[k];
+	else if (flag == 5)
+		for (k = 0; Illegal[k] != '\0'; k++, i++)
+			shell_count[0][i] = Illegal[k];
 	else
 		for (k = 0; nfound[k] != '\0'; k++, i++)
 			shell_count[0][i] = nfound[k];

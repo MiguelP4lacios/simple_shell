@@ -2,7 +2,7 @@
 
 /**
  * countwords - Counts words until a s char is found
- * @input: Pointer to string to be count
+ * @in: Pointer to string to be count
  * @s: the selected char
  * Return: Number of words count
  */
