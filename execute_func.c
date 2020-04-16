@@ -5,7 +5,6 @@
  * @exec: executable with path
  * @input_user: array of arguments
  * @flag: flag to free exec if 1
- * @env: enviornment variable
  * Return: Exit status
  */
 int execute_func(char *exec, char **input_user, ssize_t flag)

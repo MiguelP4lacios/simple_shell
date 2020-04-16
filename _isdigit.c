@@ -1,7 +1,7 @@
 #include "header_shell.h"
 
 /**
-  *_isalpha - Check if a character is number
+  *_isdigit - Check if a character is number
   *@c: char to be check
   *Return: 1 if letter, 0 if not
   */

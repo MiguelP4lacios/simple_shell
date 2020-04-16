@@ -7,11 +7,13 @@
  * return : nothing
  *
 */
-void check_built_in(char **input, char *buff, list_path *head_path)
+ssize_t check_built_in(char **input, char *buff, list_path *head_path)
 {
+	ssize_t status = 0;
+
 	if (_strcmp(input[0], "exit") == 0)
 	{
-		exit_built_in(input, buff, head_path);
+		status = exit_built_in(input, buff, head_path);
 	}
 	if (_strcmp(input[0], "env") == 0)
 	{
@@ -21,5 +23,5 @@ void check_built_in(char **input, char *buff, list_path *head_path)
 	{
 		help_built_in(input);
 	}
-	
+	return (status);
 }

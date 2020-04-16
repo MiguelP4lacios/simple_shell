@@ -1,5 +1,5 @@
 #include "header_shell.h"
-char *realloc_special_string(char **master, size_t i, size_t j, char *var, size_t len_var);
+char *realloc_str(char **master, size_t i, size_t j, char *var, size_t len_var);
 
 /**
  * allocatewords - create array of words
@@ -106,7 +106,7 @@ char **check_words(char **master, size_t *numwords, size_t status)
 					printf("len_master = %d\n", _strlen(master[i]));
 					if (var != NULL || len_var + 1 != _strlen(master[i]))
 					{
-						master[i] = realloc_special_string(master, i, j, var, len_var);
+						master[i] = realloc_str(master, i, j, var, len_var);
 					}
 					else
 					{
@@ -135,14 +135,14 @@ char **check_words(char **master, size_t *numwords, size_t status)
 }
 
 /**
- * realloc_special_num - insert number in master[i], position j
+ * realloc_str - insert number in master[i], position j
  * @number: Number to be inserted
  * @master: array of strings, with the word to be modify
  * @i: position of word in master
  * @j: position of letter in word of master
  * Return: pointer to modified word
  */
-char *realloc_special_string(char **master, size_t i, size_t j, char *var, size_t len_var)
+char *realloc_str(char **master, size_t i, size_t j, char *var, size_t len_var)
 {
 	size_t k, len, len_word, len_value;
 	char *p = NULL;
