@@ -56,5 +56,9 @@ ssize_t help_built_in(char **);
 void help_exit(void);
 void help_env(void);
 void help_help(void);
+void help_setenv(void);
+void help_unsetenv(void);
+void help_cd(void);
+void help(void);
 
 #endif /* HEADER_H */

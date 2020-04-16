@@ -1,8 +1,8 @@
 #include "header_shell.h"
 /**
- * 
- * 
- * 
+ * help_built_in - info of the built in
+ * @input: argument
+ * Return: sussues 0 or 3 fail
 */
 ssize_t help_built_in(char **input)
 {
@@ -16,18 +16,34 @@ ssize_t help_built_in(char **input)
 		else if (_strcmp(input[1], "exit") == 0)
 		{
 			help_exit();
-			return(0);
+			return (0);
 		}
-		else if (_strcmp(input[1], "help") == 0 )
+		else if (_strcmp(input[1], "help") == 0)
 		{
 			help_help();
-			return(0);
+			return (0);
+		}
+		else if (_strcmp(input[1], "setenv") == 0)
+		{
+			help_setenv();
+			return (0);
+		}
+		else if (_strcmp(input[1], "unsetenv") == 0)
+		{
+			help_unsetenv();
+			return (0);
+		}
+		else if (_strcmp(input[1], "cd") == 0)
+		{
+			help_cd();
+			return (0);
 		}
 		else
 			return (3);
 	}
 	else
 	{
-		return (3); /* all */
+		help();
+		return (0);
 	}
 }
