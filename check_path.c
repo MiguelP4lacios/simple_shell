@@ -45,7 +45,7 @@ int check_path(char **exec, list_path *head, char *input_user, size_t numwords, 
 		free(*exec);
 	}
 	*exec = input_user;
-	if (stat(input_user, &sb) == 0 && sb.st_mode & S_IXUSR && !S_ISDIR(sb.st_mode) && input_user[0] == '/')
+	if (stat(input_user, &sb) == 0 && sb.st_mode & S_IXUSR && !S_ISDIR(sb.st_mode) && (input_user[0] == '/' || input_user[0] == '.'))
 		return (2);
 	else if (stat(*exec, &sb) == 0 && input_user[0] == '/')
 	{
