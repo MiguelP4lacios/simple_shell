@@ -59,5 +59,10 @@ void help_help(void);
 ssize_t setenv_built_in(char **input, ssize_t *);
 ssize_t unsetenv_built_in(char **input, ssize_t *);
 ssize_t cd_built_in(char **input, ssize_t *);
+void help_setenv(void);
+void help_unsetenv(void);
+void help_cd(void);
+void help(void);
+
 
 #endif /* HEADER_H */
