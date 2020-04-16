@@ -13,8 +13,9 @@ list_path *linked_path(void)
 	list_path *head = NULL;
 
 	path = _getenv("PATH");
+	if (path == NULL)
+		path = "";
 	num_paths = countwords(path, select);
-
 	for (i = 0; i < num_paths || path[0] == ':'; i++)
 	{
 		if (path[0] == ':')
