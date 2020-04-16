@@ -45,12 +45,16 @@ void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
 void check_built_in(char **input, char *buffer, list_path *);
 int _strcmp(char *s1, char *s2);
 void signal_handler(int);
-void exit_built_in(char **in, char *b, list_path *);
+size_t exit_built_in(char **in, char *b, list_path *);
 unsigned int _atoi(char *s);
 void print_env(void);
 char **check_words(char **, size_t *, size_t);
 char *realloc_special_num(size_t number, char **master, size_t i, size_t j);
 int _isalpha(char c);
 int _isdigit(char c);
+void help_built_in(char **);
+void help_exit(void);
+void help_env(void);
+void help_help(void);
 
 #endif /* HEADER_H */

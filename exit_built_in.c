@@ -6,7 +6,7 @@
  * @h_p: head path
  * return: nothing
 */
-void exit_built_in(char **in, char *b, list_path *h_p)
+size_t exit_built_in(char **in, char *b, list_path *h_p)
 {
 	size_t i = 0, status_exit, FV;
 
@@ -20,7 +20,7 @@ void exit_built_in(char **in, char *b, list_path *h_p)
 			}
 			else
 			{
-				return;
+				return (5);
 			}
 			i++;
 		}
