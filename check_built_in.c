@@ -7,21 +7,21 @@
  * return : nothing
  *
 */
-ssize_t check_built_in(char **input, char *buff, list_path *head_path)
+ssize_t check_built_in(char **input, char *buff, list_path *head_path, ssize_t *status)
 {
-	ssize_t status = 0;
+	ssize_t flag = 0;
 
 	if (_strcmp(input[0], "exit") == 0)
 	{
-		status = exit_built_in(input, buff, head_path);
+		flag = exit_built_in(input, buff, head_path, status);
 	}
 	if (_strcmp(input[0], "env") == 0)
 	{
-		print_env();
+		flag = print_env();
 	}
-	if (_strcmp(input[0], "help") == 0)
+	if (_strcmp(input[0], "help") == 0 )
 	{
-		help_built_in(input);
+		flag = help_built_in(input);
 	}
-	return (status);
+	return (flag);
 }
