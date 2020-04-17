@@ -16,44 +16,5 @@
 int check_path(char **exec, list_path *head,
 	       char *in, size_t numwords, ssize_t *status)
 {
-	size_t i;
-	struct stat sb;
-
-	if (numwords == 0)
-		return (0);
-	if (_strcmp(in, ".") == 0)
-	{
-		*status = 127;
-		return (4);
-	}
-	else if (_strcmp(in, "..") == 0)
-	{
-		*status = 127;
-		return (3);
-	}
-	for (i = 0; head != NULL && in[0] != '/'; i++)
-	{
-		*exec = str_concat(head->dir_path, in);
-		if (stat(*exec, &sb) == 0 && sb.st_mode & S_IXUSR)
-			return (1);
-		else if (stat(*exec, &sb) == 0)
-		{
-			*status = 126;
-			free(*exec);
-			return (3);
-		}
-		head = head->next;
-		free(*exec);
-	}
-	*exec = in;
-	if (stat(in, &sb) == 0 && sb.st_mode & S_IXUSR &&
-	    (in[0] == '/' || in[0] == '.'))
-		return (2);
-	else if (stat(*exec, &sb) == 0 && (in[0] == '/' || in[0] == '.'))
-	{
-		*status = 126;
-		return (3);
-	}
-	*status = 127;
-	return (20);
+	
 }
