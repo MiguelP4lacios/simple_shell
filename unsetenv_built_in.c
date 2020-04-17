@@ -1,8 +1,8 @@
 #include "header_shell.h"
-
-/** 
- * unsetenv_built_in - one
+/**
+ * unsetenv_built_in - Removes an environmental variable
  * @input: Array of strings, input user
+ * @status: status exit.
  * Return: 0 always
  */
 ssize_t unsetenv_built_in(char **input, ssize_t *status)

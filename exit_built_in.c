@@ -4,7 +4,8 @@
  * @in: input
  * @b: buffer input
  * @h_p: head path
- * return: nothing
+ * @status: status exit
+ * Return: success status or 5 fail
 */
 ssize_t exit_built_in(char **in, char *b, list_path *h_p, ssize_t *status)
 {

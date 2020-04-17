@@ -1,7 +1,7 @@
 #include "header_shell.h"
 /**
  * help_cd - print how to use cd(built-in) []
- * return : nothing.
+ * return: nothing.
 */
 void help_cd(void)
 {
@@ -19,7 +19,10 @@ void help_cd(void)
 	texts = "after a change of directory.\n";
 	write(STDOUT_FILENO, texts, _strlen(texts));
 }
-
+/**
+ * help - print how to use help(built-in) []
+ * return: nothing.
+*/
 void help(void)
 {
 	char *texts = "hsh\nThese shell commands are defined internally.\n";

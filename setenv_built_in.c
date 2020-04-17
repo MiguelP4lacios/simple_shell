@@ -1,8 +1,9 @@
 #include "header_shell.h"
-
-/** 
- * setenv_built_in - Initialize a new environment variable, or modify an existing one
+/**
+ * setenv_built_in - Initialize a new environment variable,
+ * or modify an existing one
  * @input: Array of strings, input user
+ * @status: status exit
  * Return: 0 always
  */
 ssize_t setenv_built_in(char **input, ssize_t *status)
@@ -37,6 +38,5 @@ ssize_t setenv_built_in(char **input, ssize_t *status)
 		p_value[0] = 'H';
 		printf("%s\n", p_value);
 	}
-
 	return (0);
 }
