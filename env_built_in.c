@@ -1,7 +1,7 @@
 #include "header_shell.h"
 /**
  * print_env - built-in print env
- * return : nothing
+ * Return: nothing
 */
 ssize_t print_env(void)
 {

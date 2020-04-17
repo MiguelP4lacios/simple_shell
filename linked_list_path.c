@@ -34,9 +34,7 @@ list_path *linked_path(void)
 
 			p = malloc(sizeof(char) * (len_dir + 1 + 1));
 			for (j = 0; j < len_dir; j++)
-			{
 				p[j] = path[j];
-			}
 			p[j] = '/';
 			p[j + 1] = '\0';
 			add_node_end(&head, p);

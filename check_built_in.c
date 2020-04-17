@@ -4,9 +4,11 @@
  * @input: input user
  * @buff: buffer input
  * @head_path: PATH
- * Return : flag
+ * @status: status exit
+ * Return: flag
 */
-ssize_t check_built_in(char **input, char *buff, list_path *head_path, ssize_t *status)
+ssize_t check_built_in(char **input, char *buff,
+list_path *head_path, ssize_t *status)
 {
 	ssize_t flag = 10;
 
