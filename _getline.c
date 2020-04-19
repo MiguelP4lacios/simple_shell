@@ -1,25 +1,22 @@
 #include "header_shell.h"
 
-ssize_t getline(char **lineptr, size_t *n, FILE *stream);
-
 /**
  * _getline - Read input of user until null
  * @buffer: buffer where input is store
- * @size_b: size of the buffer - unused
+ * @n: size of the buffer - unused
  * @stream: stdin - unused
  * Return: -1 if EOF (ctrl + d)
  */
-ssize_t _getline(char **buffer, size_t *size_b, FILE *stream __attribute__((unused)))
+ssize_t _getline(char **buffer, size_t *n, FILE *s __attribute__((unused)))
 {
 	int nread;
 	size_t new_size = 10000;
 
-	*buffer = _realloc(*buffer, *size_b, new_size);
-	*size_b = new_size;
+	*buffer = _realloc(*buffer, *n, new_size);
+	*n = new_size;
 
 	nread = read(STDIN_FILENO, *buffer, new_size);
 	if (nread == 0)
 		nread = -1;
 	return (nread);
-	return (0);
 }
