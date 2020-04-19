@@ -19,7 +19,7 @@ int main(int ac __attribute__((unused)), char *av[])
 	{
 		if (isatty(STDIN_FILENO) == 1)
 			write(STDOUT_FILENO, "$ ", 2);
-		nread = getline(&buffer, &size, stdin);
+		nread = _getline(&buffer, &size, stdin);
 		if (nread == -1)
 			break;
 		free_list_path(head_path);
