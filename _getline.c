@@ -1,13 +1,13 @@
 #include "header_shell.h"
+
 /**
- * _getline - reads an entire line from stream.
- * @lineptr: Doble pointer
- * @n: Numbrer of character
- * @stream: stdin.
- *
- * Return: On success Number of byte.
- * On error, -1 is returned, and errno is set appropriately.
+ * _getline - Read input of user until null
+ * @buffer: buffer where input is store
+ * @n: size of the buffer - unused
+ * @stream: stdin - unused
+ * Return: -1 if EOF (ctrl + d)
  */
+<<<<<<< HEAD
 ssize_t _getline(char **lineptr, size_t *n, FILE *stream __attribute__((unused)))
 {
 	static size_t INITALLOC = 16, ALLOCSTEP = 16;
@@ -39,21 +39,18 @@ ssize_t _getline(char **lineptr, size_t *n, FILE *stream __attribute__((unused))
 		{
 			size_t n_realloc = *n + ALLOCSTEP;
 			char *tmp = _realloc(*lineptr, *n, n_realloc + 1);
+=======
+ssize_t _getline(char **buffer, size_t *n, FILE *s __attribute__((unused)))
+{
+	int nread;
+	size_t new_size = 10000;
 
-			if (tmp != NULL)
-				*lineptr = tmp, *n = n_realloc;
-			else
-				return (-1);
-		}
-		(*lineptr)[num_read - 1] = (char) c;
-		if (c == '\n')
-			break;
-	}
-	if (c == EOF)
-	{
-		errno = 0;
-		return (-1);
-	}
-	(*lineptr)[num_read] = '\0';
-	return ((ssize_t) num_read);
+	*buffer = _realloc(*buffer, *n, new_size);
+	*n = new_size;
+>>>>>>> d45e6e48ecde6f678d318e8e65c9d4ef6aba85b1
+
+	nread = read(STDIN_FILENO, *buffer, new_size);
+	if (nread == 0)
+		nread = -1;
+	return (nread);
 }
