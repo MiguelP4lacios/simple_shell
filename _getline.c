@@ -8,13 +8,14 @@
  * Return: On success Number of byte.
  * On error, -1 is returned, and errno is set appropriately.
  */
-ssize_t _getline(char **lineptr, size_t *n, FILE *stream)
+ssize_t _getline(char **lineptr, size_t *n, FILE *stream __attribute__((unused)))
 {
 	static size_t INITALLOC = 16, ALLOCSTEP = 16;
 	size_t num_read = 0;
-	int c;
+	int c = ' '; 
+	ssize_t rd;
 
-	if ((lineptr == NULL) || (n == NULL) || (stream == NULL))
+	if ((lineptr == NULL) || (n == NULL))
 	{
 		errno = EINVAL;
 		return (-1);
@@ -26,8 +27,13 @@ ssize_t _getline(char **lineptr, size_t *n, FILE *stream)
 			return (-1);
 		*n = INITALLOC;
 	}
-	while ((c = getc(stream)) != EOF)
+	while (c != EOF)
 	{
+		rd = read(STDIN_FILENO, &c, 1);
+		if (rd == -1)
+		{
+			return (-1);
+		}
 		num_read++;
 		if (num_read >= *n)
 		{
